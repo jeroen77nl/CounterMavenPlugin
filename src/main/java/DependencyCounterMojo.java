@@ -8,9 +8,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -36,17 +34,16 @@ public class DependencyCounterMojo extends AbstractMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
         displayDependencies();
 
-//        String tekst = leesInvoerbestand("src/main/resources/fileTest1.txt");
-//        getLog().info("json:\n" + json);
+        String jsonHeaderString = leesInvoerbestand("src/main/resources/header.json");
+        List<String> locationNames = JsonPath.read(jsonHeaderString, "$.widget.window.locations[*].name");
+        String locationNamesHeaderString = String.join("\n", locationNames);
 
-        String json = leesInvoerbestand("src/main/resources/fileTest1.txt");
-        String widgetTitle = JsonPath.read(json, "$.widget.window.title");
-        List<String> locationNames = JsonPath.read(json, "$.widget.window.locations[*].name");
-        String locationsNamesString = String.join("\n", locationNames);
+        String jsonRequestString = leesInvoerbestand("src/main/resources/wazoRequest.json");
+        List<String> locationNamesRequest = JsonPath.read(jsonRequestString, "$.widget.window.locations[*].name");
+        String locationNamesRequestString = String.join("\n", locationNamesRequest);
 
-        Path path = Paths.get("src/main/resources/fileTest3.txt");
-//        byte[] strToBytes = (tekst + "\n" + tekst2 + "\n").getBytes();
-        byte[] strToBytes = (locationsNamesString + "\n").getBytes();
+        Path path = Paths.get("src/main/resources/properties.json");
+        byte[] strToBytes = (locationNamesHeaderString + "\n" + locationNamesRequestString + "\n").getBytes();
         try {
             Files.write(path, strToBytes);
         } catch (IOException e) {

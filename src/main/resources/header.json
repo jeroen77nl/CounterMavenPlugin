@@ -8,9 +8,8 @@
       "height": 500,
       "padding": [10,10,10,50],
       "locations" : [
-        { "name": "header", "display": "true" },
-        { "name": "footer", "display": "true" },
-        { "name": "sidebar", "display": "false" }
+        { "name": "headerfile", "display": "true" },
+        { "name": "headerfile2", "display": "true" }
       ]
     }
   }
