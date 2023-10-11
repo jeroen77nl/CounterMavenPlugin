@@ -9,6 +9,9 @@ target/
 .idea/compiler.xml
 .idea/libraries/
 .idea/vcs.xml
+.idea/google-java-format.xml
+.idea/misc.xml
+.idea/sonarlint
 *.iws
 *.iml
 *.ipr
