@@ -38,7 +38,7 @@ public class DependencyCounterMojo extends AbstractMojo {
         List<String> locationNames = JsonPath.read(jsonHeaderString, "$.widget.window.locations[*].name");
         String locationNamesHeaderString = String.join("\n", locationNames);
 
-        String jsonRequestString = leesInvoerbestand("src/main/resources/wazoRequest.json");
+        String jsonRequestString = leesInvoerbestand("src/main/resources/request.json");
         List<String> locationNamesRequest = JsonPath.read(jsonRequestString, "$.widget.window.locations[*].name");
         String locationNamesRequestString = String.join("\n", locationNamesRequest);
 
